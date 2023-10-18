@@ -143,6 +143,13 @@ subroutine get_u(uInflow, vInflow, InflowProfileAmplit, InflowProfileThick, z, z
           ! Uniform yawed inflow
           u = uInflow*cos(yaw*pi/180.d0)
           v = -uInflow*sin(yaw*pi/180.d0)
+      case(9)
+          ! SAM veer
+
+          alpha = InflowProfileAmplit * tanh((z - zMid) / InflowProfileThick) * pi / 180
+          
+          u = uInflow * cos(alpha)
+          v = uInflow * sin(alpha)
     end select
 end subroutine
 
